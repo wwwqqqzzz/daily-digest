@@ -1,44 +1,27 @@
 {{- define "main" }}
 
-<header class="page-header home-header">
-  <h1>信息差日报</h1>
-  <p class="home-description">每天 8 点，一篇解决你的信息差。</p>
-</header>
-
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = $pages | default (where site.RegularPages "Section" "posts") }}
-{{- $latest := index $pages 0 }}
-
-{{- if $latest }}
-<article class="home-featured">
-  <div class="home-featured-head">
-    <time class="home-featured-date" datetime="{{ $latest.Date.Format "2006-01-02" }}">
-      {{ $latest.Date.Format "2006-01-02" }}
-    </time>
+<article class="home-intro">
+  <div class="home-intro-brand">
+    <h1>简讯</h1>
+    <p class="home-intro-tagline">每天一份信息差</p>
   </div>
-  <h2 class="home-featured-title">
-    <a href="{{ $latest.RelPermalink }}">{{ $latest.Title }}</a>
-  </h2>
-  <div class="archive-summary">{{ plainify $latest.Summary | truncate 200 }}</div>
-  <a class="home-read-more" href="{{ $latest.RelPermalink }}">阅读全文 →</a>
-</article>
-{{- end }}
 
-<hr class="home-divider">
+  <div class="home-intro-desc">
+    <p>每天早上 8 点，一条来自昨日世界的讯号。</p>
+    <p>冷知识 · Product Hunt · Big Think · GitHub · Buzzing</p>
+  </div>
 
-<section class="home-recent">
-  <h3>历史日报</h3>
-  <div class="home-recent-list">
-    {{- range first 5 (after 1 $pages) }}
-    <div class="home-recent-entry">
-      <time>{{ .Date.Format "01-02" }}</time>
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </div>
+  <hr class="home-divider">
+
+  <div class="home-intro-actions">
+    {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+    {{- $pages = $pages | default (where site.RegularPages "Section" "posts") }}
+    {{- $latest := index $pages 0 }}
+    {{- if $latest }}
+    <a class="home-btn-primary" href="{{ $latest.RelPermalink }}">阅读最新一期</a>
     {{- end }}
+    <a class="home-btn-secondary" href="/archive/">浏览全部</a>
   </div>
-  <div class="home-archive-link">
-    <a href="/archive/">查看完整归档 →</a>
-  </div>
-</section>
+</article>
 
 {{- end }}

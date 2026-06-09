@@ -1,0 +1,31 @@
+{{- define "content" }}
+
+<section class="post-header-bar">
+  <time class="post-header-date">{{ .Date.Format "2006年01月02日" }}</time>
+  <nav class="post-header-nav">
+    <a href="/">首页</a>
+    <a href="/archive/">归档</a>
+  </nav>
+</section>
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+  </header>
+
+  <div class="post-content">
+    {{- .Content }}
+  </div>
+
+  <footer class="post-footer">
+    {{- if .Params.tags }}
+    <ul class="post-tags">
+      {{- range .Params.tags }}
+      <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </footer>
+</article>
+
+{{- end }}
