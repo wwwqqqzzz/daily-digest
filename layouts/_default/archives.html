@@ -11,19 +11,19 @@
 <div class="archive-year">
   <h2 class="archive-year-title">{{ .Key }}</h2>
 
-  {{- range .Pages.GroupByDate "January" }}
-  <div class="archive-month">
-    {{- range .Pages }}
-    <div class="archive-entry">
-      <time class="archive-date" datetime="{{ .Date.Format "2006-01-02" }}">
-        {{- .Date.Format "01-02" }}
-      </time>
-      <a class="archive-link" href="{{ .RelPermalink }}">
-        {{- .Title }}
+  {{- range .Pages }}
+      <a class="archive-entry" href="{{ .RelPermalink }}">
+        <span class="archive-date-badge">
+          <span class="archive-date-month">{{ .Date.Format "01" }}</span>
+          <span class="archive-date-day">{{ .Date.Format "02" }}</span>
+        </span>
+        <span class="archive-body">
+          <span class="archive-title">{{ .Title }}</span>
+          {{- with .Summary }}
+          <span class="archive-summary">{{ plainify . | truncate 120 }}</span>
+          {{- end }}
+        </span>
       </a>
-    </div>
-    {{- end }}
-  </div>
   {{- end }}
 </div>
 {{- end }}
