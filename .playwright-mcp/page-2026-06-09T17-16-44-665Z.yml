@@ -1,0 +1,39 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "简讯" [ref=e5] [cursor=pointer]:
+          - /url: http://localhost:1313/daily-digest/
+        - button "Toggle theme" [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "归档" [ref=e12] [cursor=pointer]:
+            - /url: http://localhost:1313/daily-digest/archive/
+  - main [ref=e13]:
+    - article [ref=e14]:
+      - generic [ref=e15]:
+        - heading "简讯" [level=1] [ref=e16]
+        - paragraph [ref=e17]: 每天一份信息差
+      - generic [ref=e18]:
+        - paragraph [ref=e19]: 每天早上 8 点，一条来自昨日世界的讯号。
+        - paragraph [ref=e20]: 冷知识 · Product Hunt · Big Think · GitHub · Buzzing
+      - separator [ref=e21]
+      - generic [ref=e22]:
+        - link "阅读最新一期 →" [ref=e23] [cursor=pointer]:
+          - /url: /daily-digest/posts/2026-06-09-%E4%BF%A1%E6%81%AF%E5%B7%AE%E6%97%A5%E6%8A%A5/
+        - link "浏览全部" [ref=e24] [cursor=pointer]:
+          - /url: /archive/
+  - contentinfo [ref=e25]:
+    - generic [ref=e26]:
+      - text: © 2026
+      - link "简讯" [ref=e27] [cursor=pointer]:
+        - /url: http://localhost:1313/daily-digest/
+    - text: ·
+    - generic [ref=e28]:
+      - text: Powered by
+      - link "Hugo" [ref=e29] [cursor=pointer]:
+        - /url: https://gohugo.io/?utm_source=papermod
+      - text: "&"
+      - link "PaperMod" [ref=e30] [cursor=pointer]:
+        - /url: https://github.com/adityatelange/hugo-PaperMod/

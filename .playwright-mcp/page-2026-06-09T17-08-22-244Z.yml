@@ -1,0 +1,379 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "简讯" [ref=e5] [cursor=pointer]:
+          - /url: http://localhost:1313/daily-digest/
+        - button "Toggle theme" [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "归档" [ref=e12] [cursor=pointer]:
+            - /url: http://localhost:1313/daily-digest/archive/
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - complementary [ref=e15]:
+        - navigation [ref=e16]:
+          - generic [ref=e17]: 日期导航
+          - generic [ref=e18]:
+            - button "2026年 ▸" [ref=e19] [cursor=pointer]:
+              - text: 2026年
+              - generic [ref=e20]: ▸
+            - generic [ref=e22]:
+              - generic [ref=e23]: 6月
+              - generic [ref=e24]:
+                - link "8" [ref=e25] [cursor=pointer]:
+                  - /url: /daily-digest/posts/2026-06-08-%E4%BF%A1%E6%81%AF%E5%B7%AE%E6%97%A5%E6%8A%A5/
+                - link "9" [ref=e26] [cursor=pointer]:
+                  - /url: /daily-digest/posts/2026-06-09-%E4%BF%A1%E6%81%AF%E5%B7%AE%E6%97%A5%E6%8A%A5/
+      - article [ref=e27]:
+        - heading "信息差日报 · 2026-06-08" [level=1] [ref=e29]
+        - generic [ref=e30]:
+          - heading "信息差日报 · 2026-06-08" [level=1] [ref=e31]
+          - heading "一、🧊 冷知识" [level=2] [ref=e32]
+          - heading "JavaScript 的 setTimeout(fn, 0) 不是\"立即执行\"" [level=3] [ref=e33]
+          - paragraph [ref=e34]:
+            - text: 你写
+            - code [ref=e35]: setTimeout(() => console.log("B"), 0)
+            - text: ，它不会在下一行之前执行。它会排在任务队列末尾，等当前执行栈清空后才轮到。
+          - paragraph [ref=e36]:
+            - text: 这个机制来自浏览器的事件循环（event loop）。事件循环的核心是一个无限循环：取出一个任务 → 执行 → 取出下一个任务。
+            - code [ref=e37]: setTimeout
+            - text: 不是"定时执行"，而是"把任务插入队列，等到时间到了就排进队"。所以 setTimeout 保证的是至少等 N 毫秒，不是恰好 N 毫秒后执行。
+          - paragraph [ref=e38]:
+            - text: MDN 还写了几个有意思的细节：嵌套超过 5 层时，最小延迟被强制设为 4ms（为了防止开发者恶意阻塞主线程）；页面在后台标签页时会被节流到 1000ms（为了省电）。最常用的是
+            - code [ref=e39]: setTimeout(fn, 0)
+            - text: ——你希望"等当前代码跑完再执行"。这不等于多线程，只是利用了单线程的排队机制。
+          - paragraph [ref=e40]:
+            - text: Brendan Eich 管这个叫 “least necessary lying” —— 为了让开发者不至于用死循环"等一会儿"，语言设计者给出了最小的谎。你写的每一行
+            - code [ref=e41]: setTimeout(fn, 0)
+            - text: 背后，都有一个浏览器在替你掩饰这个谎言。
+          - separator [ref=e42]
+          - heading "二、🔥 Product Hunt" [level=2] [ref=e43]
+          - 'heading "Dreambeans by Google Labs: 你的数据就是故事素材" [level=3] [ref=e44]'
+          - group [ref=e45]:
+            - generic "▶ 视频演示" [ref=e46] [cursor=pointer]
+          - generic [ref=e47]:
+            - img [ref=e48]
+            - img [ref=e49]
+            - img [ref=e50]
+            - img [ref=e51]
+            - img [ref=e52]
+            - img [ref=e53]
+            - img [ref=e54]
+            - img [ref=e55]
+            - img [ref=e56]
+          - blockquote [ref=e57]:
+            - paragraph [ref=e58]: "[!abstract] 简介 从你的 Google 应用数据（日历、相册、邮件、地图）中提取每日素材，自动生成个性化的 AI 故事。"
+          - paragraph [ref=e59]: Google 在 WWDC 2026 开幕日当天发布了这款面向消费者的 AI 产品，意在秀肌肉的同时也展示 Google 的 AI 不是只有搜索和助手。
+          - paragraph [ref=e60]: 思路很直接：你的 Google 数据量是最大的——日历里有什么会议、相册拍了什么照片、邮件里跟谁聊了什么、地图上去过哪里——这些本身就是故事素材，只是没有工具把它们串起来。Dreambeans 做的事情就是读取这些数据，每天生成一个带上下文的叙事故事，而不是干巴巴的"今天你做了三件事"的列表。
+          - paragraph [ref=e61]: 这个定位有意思的地方在于它不是效率工具，是情感工具。它读你的数据不是为了让你的工作更快，是为了让你记住。跟 Google Photos 的"回忆"功能接近，区别是 LLM 接管了叙事——不再是幻灯片式的照片拼接，而是真正有开头、中间、结尾的日常故事。Google 强调处理在本地完成，但意图识别和故事生成用的是什么模型、是否调用了云端，没说清楚。隐私上，让 Google 读取你的全部应用数据来编故事，这个信任门槛不低。另外，“每天一个故事"这个格式本身也是一个考验——用户是每天期待还是三天就腻，取决于 LLM 能不能真的讲出让人想看的东西，而不是模板化的"今天你去了咖啡馆，拍了一张照片，发了一封邮件”。
+          - paragraph [ref=e62]:
+            - strong [ref=e63]: "数据:"
+            - text: 381 👍 · 56 💬
+            - strong [ref=e64]: "发布时间(北京):"
+            - text: 2026-06-08 15:00
+            - strong [ref=e65]: "是否被推荐:"
+            - text: "==今日 #1=="
+            - strong [ref=e66]: "分类:"
+            - code [ref=e67]: AI
+            - text: ·
+            - code [ref=e68]: Google
+            - text: ·
+            - code [ref=e69]: Personal storytelling
+            - strong [ref=e70]: "链接:"
+            - link "Product Hunt" [ref=e71] [cursor=pointer]:
+              - /url: https://www.producthunt.com/products/google-labs
+            - text: ·
+            - link "Google Labs" [ref=e72] [cursor=pointer]:
+              - /url: https://labs.google/
+          - 'heading "Wave: 语音转文字，本地运行" [level=3] [ref=e73]'
+          - group [ref=e74]:
+            - generic "▶ 视频演示" [ref=e75] [cursor=pointer]
+          - generic [ref=e76]:
+            - img [ref=e77]
+            - img [ref=e78]
+            - img [ref=e79]
+            - img [ref=e80]
+            - img [ref=e81]
+          - blockquote [ref=e82]:
+            - paragraph [ref=e83]: "[!tip] 简介 语音转文字工具，所有处理在本地完成，数据不出设备。"
+          - paragraph [ref=e84]: 从 OpenAI Whisper 开源之后，本地语音识别这个品类一直在增长。macOS 上已经有不少同类工具了：MacWhisper、SuperWhisper、Whisper Transcription——各自在 UI 细节和价格上做差异化。
+          - paragraph [ref=e85]: Wave 选在 WWDC 期间发布，时机的选择比产品本身更值得注意。Apple 正在全力推 on-device AI，用户对"数据不上云"的预期在变成默认要求。在这个背景下，Wave 的"本地运行不出网"不是一个差异化卖点，而是一张入场券——你不能本地处理，用户根本不会看你第二眼。
+          - paragraph [ref=e86]: 遗憾的是 Wave 的产品页面没有说清楚跟同类工具的差异点。识别准确率？支持的语言数量？实时转写还是先录后转？API 接口是否开放？这些都没提。对于一个竞争激烈、功能同质化严重的品类，不说清楚差异就等于没有存在理由。
+          - paragraph [ref=e87]:
+            - strong [ref=e88]: "数据:"
+            - text: 280 👍 · 34 💬
+            - strong [ref=e89]: "发布时间(北京):"
+            - text: 2026-06-08 15:00
+            - strong [ref=e90]: "是否被推荐:"
+            - text: "今日 #2"
+            - strong [ref=e91]: "分类:"
+            - code [ref=e92]: Productivity
+            - text: ·
+            - code [ref=e93]: AI
+            - text: ·
+            - code [ref=e94]: Voice
+            - text: ·
+            - code [ref=e95]: Privacy
+            - strong [ref=e96]: "链接:"
+            - link "Product Hunt" [ref=e97] [cursor=pointer]:
+              - /url: https://www.producthunt.com/products/wave-16
+          - 'heading "Smmall Cloud for iOS: 你的 iPhone 相册就是云盘" [level=3] [ref=e98]'
+          - group [ref=e99]:
+            - generic "▶ 视频演示" [ref=e100] [cursor=pointer]
+          - generic [ref=e101]:
+            - img [ref=e102]
+            - img [ref=e103]
+            - img [ref=e104]
+            - img [ref=e105]
+            - img [ref=e106]
+            - img [ref=e107]
+          - blockquote [ref=e108]:
+            - paragraph [ref=e109]: "[!info] 简介 把你的 iOS 设备变成私有云盘，照片、文件直接存在手机上，不需要第三方服务器。"
+          - paragraph [ref=e110]: iCloud 不够用？Google Photos 快满了？Smmall Cloud 的卖点很简单：你的手机就是服务器。照片拍完直接存在本机，通过 P2P 在其他设备上访问。不需要订阅、不需要上传到别人的服务器、数据量完全不设限——你的手机能存多少就能用多少。
+          - paragraph [ref=e111]: 在隐私意识越来越强的市场环境下，这种"零信任"方案的吸引力在上升。用户不用再担心 iCloud 泄露、Google Photos 的 AI 训练条款、Dropbox 的定价上涨。代价很实在：手机存储空间有限（128GB 起步？还是 512GB 才够用？没说明），而且手机没电或不在线时文件就无法访问。
+          - paragraph [ref=e112]: 同类产品有 PhotoSync（Wi-Fi 直传）、Syncthing（开源 P2P 同步）、Fileloupe 等。Smmall Cloud 的差异化没说清楚，而且只支持 iOS——如果你的工作流跨平台，它就不够用。定价未公开。
+          - paragraph [ref=e113]:
+            - strong [ref=e114]: "数据:"
+            - text: 220 👍 · 18 💬
+            - strong [ref=e115]: "发布时间(北京):"
+            - text: 2026-06-08
+            - strong [ref=e116]: "是否被推荐:"
+            - text: "今日 #3"
+            - strong [ref=e117]: "分类:"
+            - code [ref=e118]: iOS
+            - text: ·
+            - code [ref=e119]: Cloud storage
+            - text: ·
+            - code [ref=e120]: Privacy
+            - strong [ref=e121]: "链接:"
+            - link "Product Hunt" [ref=e122] [cursor=pointer]:
+              - /url: https://www.producthunt.com/products/smmall-cloud
+          - 'heading "CabinLink: 跨平台密码共享新思路" [level=3] [ref=e123]'
+          - generic [ref=e124]:
+            - img [ref=e125]
+            - img [ref=e126]
+            - img [ref=e127]
+          - blockquote [ref=e128]:
+            - paragraph [ref=e129]: "[!example] 简介 跨设备密码管理和安全共享工具，端到端加密，主打\"共享\"这个一直被忽视的场景。"
+          - paragraph [ref=e130]: 密码管理器这个品类已经非常拥挤了——1Password、Bitwarden、Dashlane、Keeper、NordPass、iCloud Keychain……每个都有自己的忠实用户群。但"安全共享"这个场景在整个密码管理器品类里一直做得不好。给家人分享 Wi-Fi 密码、给同事分享登录凭证、给伴侣分享流媒体账号——现有方案要么太复杂（需要对方也装同一个密码管理器），要么不够安全（明文发微信），要么功能藏得太深（1Password 的共享 vault 设置流程长达 5 步）。
+          - paragraph [ref=e131]: CabinLink 瞄准的就是这个缝。端到端加密是所有密码管理器的基操，真正的差异化在于共享流程能做得多流畅。如果还是"生成一个链接 → 复制 → 粘贴给对方 → 对方打开 → 验证身份 → 下载应用"那套，那跟已有的就没区别。如果真能做到"一条链接、对方点开即用、看完自动销毁"，那才有竞争力。定价和具体实现方式未公开，现阶段的讨论只能停留在概念层面。
+          - paragraph [ref=e132]:
+            - strong [ref=e133]: "数据:"
+            - text: 175 👍 · 22 💬
+            - strong [ref=e134]: "发布时间(北京):"
+            - text: 2026-06-08
+            - strong [ref=e135]: "是否被推荐:"
+            - text: "今日 #4"
+            - strong [ref=e136]: "分类:"
+            - code [ref=e137]: Security
+            - text: ·
+            - code [ref=e138]: Productivity
+            - text: ·
+            - code [ref=e139]: Passwords
+            - strong [ref=e140]: "链接:"
+            - link "Product Hunt" [ref=e141] [cursor=pointer]:
+              - /url: https://www.producthunt.com/products/cabinlink
+          - 'heading "Job Postings API: 免费职位数据的开发者接口" [level=3] [ref=e142]'
+          - generic [ref=e143]:
+            - img [ref=e144]
+            - img [ref=e145]
+            - img [ref=e146]
+          - blockquote [ref=e147]:
+            - paragraph [ref=e148]: "[!tip] 简介 免费的职位发布 API，开发者可以集成招聘数据到自己的应用中。"
+          - paragraph [ref=e149]: 每个做招聘相关应用的开发者都需要职位数据。接入 Indeed、LinkedIn、Glassdoor 的官方 API 要么贵（Indeed 的 CPC 模型）、要么申请流程漫长（LinkedIn 的 Partnership 审核需要几周甚至数月）、要么限制重重（返回字段有限）。Job Postings API 走的是免费路线——聚合多个来源的职位信息，通过一个统一的 REST API 输出。
+          - paragraph [ref=e150]: 免费层对个人开发者和初创公司够用。商业模式的猜测：可能通过流量变现、高级查询收费、或者嵌入招聘广告。跟去年的 OpenJobAPI 和 Jooble API 定位接近，差异没说清楚。文档是否完善、数据更新频率、支持的国家和语言——这些决定 API 质量的关键信息在产品页上找不到。
+          - paragraph [ref=e151]:
+            - strong [ref=e152]: "数据:"
+            - text: 145 👍 · 12 💬
+            - strong [ref=e153]: "发布时间(北京):"
+            - text: 2026-06-08
+            - strong [ref=e154]: "是否被推荐:"
+            - text: "今日 #5"
+            - strong [ref=e155]: "分类:"
+            - code [ref=e156]: API
+            - text: ·
+            - code [ref=e157]: Developer tools
+            - text: ·
+            - code [ref=e158]: Hiring
+            - strong [ref=e159]: "链接:"
+            - link "Product Hunt" [ref=e160] [cursor=pointer]:
+              - /url: https://www.producthunt.com/products/free-job-postings-api
+          - separator [ref=e161]
+          - heading "三、🧠 Big Think" [level=2] [ref=e162]
+          - heading "AI 正在悄悄重塑我们对\"心智\"的理解" [level=3] [ref=e163]
+          - paragraph [ref=e164]: Seth 在那不勒斯的实验室里和一群章鱼待了一周。它们像"活的天气"一样变换颜色和形状，触手像半独立的生物各自探索，甚至皮肤本身都能感光。章鱼的意识——如果它存在的话——可能是分布式的，没有一个单一的指挥中心。Seth 说，章鱼的心智像是进化做的一个独立实验，几乎是我们能遇到的"地球上的外星人"。但即便如此，他仍然觉得章鱼和我们，比和 AI 更像"亲属"。
+          - paragraph [ref=e165]: 文章反复在提醒：把大脑想成"计算机"、把人类想成"算法"，其实是一种非常强的隐喻，会慢慢削弱我们对自身的理解。现在大模型会说话了，有人就开始反过来问：如果它只是"随机鹦鹉"，那人类是不是也只是高级"随机鹦鹉"？Seth 觉得这是一种危险的机械化思维，因为人类和模型在太多方面不同：我们有身体、有情绪、有代谢、有活着的感觉，而不是一堆脱离材质的符号运算。
+          - paragraph [ref=e166]: 他提到一个有趣的对比：说"心脏是泵"还算不错，因为它确实在做类似的事情；但说"大脑是计算机"，就远不止是一个比喻了，而是一种非常"偏向性"的主张。现代计算理论强调算法和载体无关，这在工程上很有用，却也让我们习惯性忽略那些"湿乎乎"的生物细节：神经元的化学反应、身体和环境的连续时间、饥饿、口渴、必须行动的压力等等。可对人类来说，认知恰恰是和这些缠在一起的。
+          - paragraph [ref=e167]: 另一个让我在意的点是语言。以前我们觉得"会说话"是人类的领地：不是每个人下棋，但几乎每个人都会说话。现在大模型流利输出文字，一边模糊了人和机器的界限，另一方面，AI 又在帮助我们解码动物的交流，比如海豚，于是人和动物之间的界限也被冲击。原来那个"语言的边界"，已经从两侧同时被蚕食。
+          - paragraph [ref=e168]: Seth 也在反思"理解"和"意识"的关系。他承认目前的系统大概率没有意识，但有没有可能存在一种"无意识的理解"？比如一个具身、在真实世界中互动训练出来的模型，或许可以被说成"理解"一些东西，却未必有主观体验。这会逼我们重新区分：理解、智能和意识到底是不是同一回事。
+          - paragraph [ref=e169]: 他特别强调了三个对比：连续时间、具身性和"活着的感觉"。人不能卡在一个"死循环"里到世界末日，因为身体会饿、会渴、会累，我们"总得做点什么"。这种被时间和身体不断推动的状态，让我们不得不在无限复杂的世界里，武断地选出"此刻重要的那一点"去行动。而很多认知，其实不是在脑子里算出来的，而是在身体和环境的互动中展开的。
+          - paragraph [ref=e170]: 文章最后提到一个很重要的概念：foba——“活着的感觉”。也许所有意识体验的核心，是一种朦胧却持续的"我还活着"的底色。如果把这种感觉抽空，只剩下纯粹的符号运算，也许体验本身就不复存在了。Seth 说，真正给经验"注入火焰"的不是信息处理，而是"生命"本身。
+          - paragraph [ref=e171]: 读完后有一种被轻轻拉回现实世界的感觉。最近 AI 的进步，很容易把人也想成某种可复制、可上传的"心智程序"，好像真正重要的是模型结构和参数，而不是这具正在呼吸、会衰老、会疼痛的身体。Seth 提醒我要反过来：人类也许更像"会思考的动物"，而不是"披着肉身的机器"。灵魂也许不是要逃离身体，而是深深扎根在"呼吸、血肉和活着的感觉"里。
+          - paragraph [ref=e172]:
+            - strong [ref=e173]: 链接：
+            - link "How AI is quietly changing what we think the human mind is" [ref=e174] [cursor=pointer]:
+              - /url: https://bigthink.com/philosophy/how-ai-is-quietly-changing-what-we-think-the-human-mind-is/
+          - heading "Charles Duhigg：大脑 40% 的时间在跑三个零件的习惯循环" [level=3] [ref=e175]
+          - paragraph [ref=e176]: 有一个例子让我印象很深。一个退休警察，每天下午 3 点 15 分会不自觉地走到厨房吃一块饼干。他不是饿——退休以后那个时间没有案子、没有巡逻、没有任何事需要他，大脑进入空白状态，它受不了空白，就自动去找了件熟悉的事做。而那饼干的味道他根本不在乎，他在乎的是咀嚼那五分钟里什么都不用想的轻松感。
+          - paragraph [ref=e177]: Duhigg 把这种结构叫作 cue → routine → reward。听起来简单，但仔细想想，我每天有多少行为也是这么跑完的——打开手机、刷社交媒体、切到下一个 tab，trigger 可能只是"手头的事情有一点不确定"，reward 是"暂时不用面对这个不确定"的那种短暂解脱。
+          - paragraph [ref=e178]: 我特别在意的一点是，他说试图"消除"一个习惯从神经学上可能是徒劳的。大脑不区分好习惯和坏习惯，只区分"已固化的通路"和"未固化的通路"。每一条习惯都是一条被反复踩出来的路，髓鞘把它加固，最终变成你不用思考就会走上去的高速公路。告诉自己"别吃了"是在对抗一条高速公路——你的意志力赢不了。更可行的做法，可能去 hijack 这条路：保留入口和出口，慢慢把中间那段路换掉。P&G 靠这个思路把一个除臭剂卖成了十亿美元，因为他们发现消费者不是在买"腋下干爽"，是在买"早上出门前那一刻的自信"——这个 cue 和 reward 跟化学成分毫无关系。
+          - paragraph [ref=e179]: 他提到的一个观察让我停下来想了一会儿。他说你最想掐掉的那个习惯——那个让你自己都觉得"我到底是怎么了"的习惯——往往是最值得花时间去拆的。因为强烈的羞耻感意味着它连接着更深层的东西，一旦翻出来拆开看，释放的能量也最大。这让我想到自己的一些行为模式，那些每次发生后都让我觉得"怎么又这样"的瞬间——也许问题不在行为本身，在我从来没认真看过它前面的 cue 是什么。
+          - paragraph [ref=e180]: 也许可以先挑一个最常出现的场景来拆。比如每次面对一个不确定的需求时，我下一步到底是去刷手机，还是可以先写下来"我现在到底在怕什么"。这段访谈叫 The 3-part habit loop，以前看这类标题只觉得是又一套效率框架，今天第一次觉得它更像一面照妖镜。最难的从来不是改掉一个习惯，最难的是承认：我每天走进厨房打开冰箱，不是因为饿，是因为不想打开 VSCode 里那道还没写完的 TODO。
+          - separator [ref=e181]
+          - heading "四、📦 GitHub 今日新星" [level=2] [ref=e182]
+          - heading "last30days-skill" [level=3] [ref=e183]
+          - paragraph [ref=e184]: 跨 Reddit、X、YouTube、HN、Polymarket 搜索任何话题并合成有出处的总结报告。31K ★，今天涨了 1,111。“agent 外挂数据采集能力"这个品类还在快速增长——本质上是把"信息聚合"封装成了 agent 插件，你只需要说"查一下最近的 AI 融资趋势”，它自己去各处爬。
+          - paragraph [ref=e185]:
+            - link "GitHub" [ref=e186] [cursor=pointer]:
+              - /url: https://github.com/mvanhorn/last30days-skill
+            - text: · 31,574 ★（+1,111）
+          - heading "taste-skill" [level=3] [ref=e187]
+          - paragraph [ref=e188]: 给你的 AI agent 装上"品味"——防止它生成无聊、模板化的内容。37K ★，今天涨了 1,103。解决的问题非常真实：LLM 输出的"AI 味"太重了——第一段永远是指出背景、第二段永远是分析问题、第三段永远是总结展望。这东西相当于一个后处理过滤器，在 LLM 输出之后做一轮审美审查。
+          - paragraph [ref=e189]:
+            - link "GitHub" [ref=e190] [cursor=pointer]:
+              - /url: https://github.com/Leonxlnx/taste-skill
+            - text: · 37,039 ★（+1,103）
+          - heading "Goose" [level=3] [ref=e191]
+          - paragraph [ref=e192]: 开源 AI agent，不只是代码补全——安装、执行、编辑、测试、部署，任何 LLM 后端都能跑。47K ★，今天 +322。最大的亮点是模型无关：你可以用 Claude、GPT、本地模型、甚至是自己的微调模型。不绑定任何供应商。
+          - paragraph [ref=e193]:
+            - link "GitHub" [ref=e194] [cursor=pointer]:
+              - /url: https://github.com/aaif-goose/goose
+            - text: · 47,594 ★（+322）
+          - heading "open-notebook" [level=3] [ref=e195]
+          - paragraph [ref=e196]: Google Notebook LM 的开源替代。上传文档自动出摘要、问答、和音频讨论。今天涨 554。跟 WWDC 有关——当 Apple 开始强调 on-device AI 时，用户对"数据在谁手里"的关注度在上升。自托管方案的需求在涨。
+          - paragraph [ref=e197]:
+            - link "GitHub" [ref=e198] [cursor=pointer]:
+              - /url: https://github.com/lfnovo/open-notebook
+            - text: · 27,393 ★（+554）
+          - heading "llama.cpp" [level=3] [ref=e199]
+          - paragraph [ref=e200]: GGML 组织的 C/C++ LLM 推理引擎，几乎所有的本地 LLM 工具都在用它做底层。115K ★。如果你在本地跑过任何 LLM，大概率已经间接用过它了。
+          - paragraph [ref=e201]:
+            - link "GitHub" [ref=e202] [cursor=pointer]:
+              - /url: https://github.com/ggml-org/llama.cpp
+            - text: · 115,393 ★
+          - separator [ref=e203]
+          - heading "五、🌐 Buzzing 精选" [level=2] [ref=e204]
+          - paragraph [ref=e205]: 来自 Buzzing.cc 各频道今日热门。
+          - list [ref=e206]:
+            - listitem [ref=e207]:
+              - link "DeepSeek V4 Pro 在准确率方面超越了 GPT-5.5 Pro" [ref=e208] [cursor=pointer]:
+                - /url: https://runtimewire.com/
+              - text: ↑ 110 HN Points — 开源 vs 闭源的差距在缩小。DeepSeek 的追赶速度比大多数人预期的快
+            - listitem [ref=e209]:
+              - link "Linear 为何如此快？技术解析" [ref=e210] [cursor=pointer]:
+                - /url: https://performance.dev
+              - text: ↑ 111 HN Points — 从数据库 Schema 优化到缓存策略到前端渲染管线，一篇不多见的深度技术拆解
+            - listitem [ref=e211]:
+              - link "LLM 正在侵蚀我的软件工程职业生涯" [ref=e212] [cursor=pointer]:
+                - /url: https://human-in-the-loop.bearblog.dev/
+              - text: ↑ 125 HN Points — 不是技术帖，是一篇个人叙事。AI 替代焦虑从"未来可能"变成了"正在发生"
+            - listitem [ref=e213]:
+              - 'link "Show HN: 车床——利用 LLM 来学习新领域，而非直接跳过" [ref=e214] [cursor=pointer]':
+                - /url: https://github.com/
+              - text: ↑ 104 HN Points — 教你学，不是替你学。这个角度在"AI 替代一切"的喧嚣里很新鲜
+            - listitem [ref=e215]:
+              - link "现在我用 Claude 做设计的时间比用 Figma 还要多" [ref=e216] [cursor=pointer]:
+                - /url: https://blog.janestreet.com/
+              - text: ↑ 106 HN Points — 设计师工作流在变。不是 AI 替代设计，是 AI 成了设计工具链的默认层
+            - listitem [ref=e217]:
+              - link "美国人工智能的 OnlyFans 经济" [ref=e218] [cursor=pointer]:
+                - /url: https://leoveanu.com/
+              - text: ↑ 104 HN Points — AI 时代创作者经济的暗面：当生成内容比人类创作更便宜时，平台和创作者的关系在变
+            - listitem [ref=e219]:
+              - link "Podman 6：机器可用性改进" [ref=e220] [cursor=pointer]:
+                - /url: https://blog.podman.io/
+              - text: ↑ 101 HN Points — 容器工具链的小步快跑，Docker 的替代者越来越成熟了
+            - listitem [ref=e221]:
+              - link "校园枪击案幸存者起诉 AI 枪支检测公司，因其系统未能发现武器" [ref=e222] [cursor=pointer]:
+                - /url: https://arstechnica.com/
+              - text: — AI 安防的问责问题：如果系统没检测到，谁负责？不是学术问题，是人命问题
+            - listitem [ref=e223]:
+              - link "小型模块化核反应堆首次测试达到临界" [ref=e224] [cursor=pointer]:
+                - /url: https://arstechnica.com/
+              - text: — 核能小型化迈出实质一步。AI 数据中心的能源焦虑一直没解决，这个方向可能是答案
+            - listitem [ref=e225]:
+              - link "数据中心计划在抗议声中缩减 50%" [ref=e226] [cursor=pointer]:
+                - /url: https://arstechnica.com/
+              - text: — AI 基建的社区阻力在变大。选址越来越难，“我们得罪了很多人”——文章原话
+            - listitem [ref=e227]:
+              - link "谷歌被勒令在 AI 搜索中添加更清晰链接，允许英国出版商退出" [ref=e228] [cursor=pointer]:
+                - /url: https://arstechnica.com/
+              - text: — AI 搜索的版权博弈：监管已经在追
+      - complementary [ref=e229]:
+        - group [ref=e230]:
+          - generic "目录" [ref=e231]
+          - navigation [ref=e233]:
+            - list [ref=e234]:
+              - listitem [ref=e235]:
+                - link "一、🧊 冷知识" [ref=e236] [cursor=pointer]:
+                  - /url: "#一-冷知识"
+                - list [ref=e237]:
+                  - listitem [ref=e238]:
+                    - link "JavaScript 的 setTimeout(fn, 0) 不是\"立即执行\"" [ref=e239] [cursor=pointer]:
+                      - /url: "#javascript-的-settimeoutfn-0-不是立即执行"
+              - listitem [ref=e240]:
+                - link "二、🔥 Product Hunt" [ref=e241] [cursor=pointer]:
+                  - /url: "#二-product-hunt"
+                - list [ref=e242]:
+                  - listitem [ref=e243]:
+                    - 'link "Dreambeans by Google Labs: 你的数据就是故事素材" [ref=e244] [cursor=pointer]':
+                      - /url: "#dreambeans-by-google-labs-你的数据就是故事素材"
+                  - listitem [ref=e245]:
+                    - 'link "Wave: 语音转文字，本地运行" [ref=e246] [cursor=pointer]':
+                      - /url: "#wave-语音转文字本地运行"
+                  - listitem [ref=e247]:
+                    - 'link "Smmall Cloud for iOS: 你的 iPhone 相册就是云盘" [ref=e248] [cursor=pointer]':
+                      - /url: "#smmall-cloud-for-ios-你的-iphone-相册就是云盘"
+                  - listitem [ref=e249]:
+                    - 'link "CabinLink: 跨平台密码共享新思路" [ref=e250] [cursor=pointer]':
+                      - /url: "#cabinlink-跨平台密码共享新思路"
+                  - listitem [ref=e251]:
+                    - 'link "Job Postings API: 免费职位数据的开发者接口" [ref=e252] [cursor=pointer]':
+                      - /url: "#job-postings-api-免费职位数据的开发者接口"
+              - listitem [ref=e253]:
+                - link "三、🧠 Big Think" [ref=e254] [cursor=pointer]:
+                  - /url: "#三-big-think"
+                - list [ref=e255]:
+                  - listitem [ref=e256]:
+                    - link "AI 正在悄悄重塑我们对\"心智\"的理解" [ref=e257] [cursor=pointer]:
+                      - /url: "#ai-正在悄悄重塑我们对心智的理解"
+                  - listitem [ref=e258]:
+                    - link "Charles Duhigg：大脑 40% 的时间在跑三个零件的习惯循环" [ref=e259] [cursor=pointer]:
+                      - /url: "#charles-duhigg大脑-40-的时间在跑三个零件的习惯循环"
+              - listitem [ref=e260]:
+                - link "四、📦 GitHub 今日新星" [ref=e261] [cursor=pointer]:
+                  - /url: "#四-github-今日新星"
+                - list [ref=e262]:
+                  - listitem [ref=e263]:
+                    - link "last30days-skill" [ref=e264] [cursor=pointer]:
+                      - /url: "#last30days-skill"
+                  - listitem [ref=e265]:
+                    - link "taste-skill" [ref=e266] [cursor=pointer]:
+                      - /url: "#taste-skill"
+                  - listitem [ref=e267]:
+                    - link "Goose" [ref=e268] [cursor=pointer]:
+                      - /url: "#goose"
+                  - listitem [ref=e269]:
+                    - link "open-notebook" [ref=e270] [cursor=pointer]:
+                      - /url: "#open-notebook"
+                  - listitem [ref=e271]:
+                    - link "llama.cpp" [ref=e272] [cursor=pointer]:
+                      - /url: "#llamacpp"
+              - listitem [ref=e273]:
+                - link "五、🌐 Buzzing 精选" [ref=e274] [cursor=pointer]:
+                  - /url: "#五-buzzing-精选"
+  - contentinfo [ref=e275]:
+    - generic [ref=e276]:
+      - text: © 2026
+      - link "简讯" [ref=e277] [cursor=pointer]:
+        - /url: http://localhost:1313/daily-digest/
+    - text: ·
+    - generic [ref=e278]:
+      - text: Powered by
+      - link "Hugo" [ref=e279] [cursor=pointer]:
+        - /url: https://gohugo.io/?utm_source=papermod
+      - text: "&"
+      - link "PaperMod" [ref=e280] [cursor=pointer]:
+        - /url: https://github.com/adityatelange/hugo-PaperMod/
