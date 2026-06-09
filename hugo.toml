@@ -20,7 +20,8 @@ enableEmoji = true
   ShowCodeCopyButtons = true
   ShowWordCount = false
   ShowRssButtonInSectionTermList = false
-  UseHugoToc = true
+  UseHugoToc = false
+  ShowTableOfContents = true
   disableScrollToTop = false
 
   [params.homeInfoParams]
