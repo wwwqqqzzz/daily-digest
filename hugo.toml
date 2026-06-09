@@ -2,8 +2,13 @@ baseURL = "https://wwwqqqzzz.github.io/daily-digest/"
 languageCode = "zh-cn"
 title = "信息差日报"
 theme = "PaperMod"
-paginate = 10
 enableEmoji = true
+
+[pagination]
+  pagerSize = 10
+
+[markup.goldmark.renderer]
+  unsafe = true
 
 [params]
   [params.homeInfoParams]
