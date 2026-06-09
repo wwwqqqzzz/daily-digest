@@ -1,0 +1,29 @@
+baseURL = "https://wwwqqqzzz.github.io/daily-digest/"
+languageCode = "zh-cn"
+title = "信息差日报"
+theme = "PaperMod"
+paginate = 10
+enableEmoji = true
+
+[params]
+  [params.homeInfoParams]
+    Title = "信息差日报"
+    Content = "每天 8 点，一篇解决你的信息差。冷知识 · Product Hunt · Big Think · GitHub · Buzzing"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/wwwqqqzzz"
+
+  [params.cover]
+    linkFullImages = true
+
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+
+[menu]
+  [[menu.main]]
+    identifier = "archive"
+    name = "归档"
+    url = "/archive/"
+    weight = 10
