@@ -1,0 +1,98 @@
+/* ===== 信息差日报样式 ===== */
+
+/* Callout blocks */
+.post-content blockquote {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-left: 4px solid #6b9df7;
+    background: var(--code-bg, #f6f8fa);
+}
+.post-content blockquote p {
+    margin: 0.3em 0;
+}
+.post-content blockquote p:first-child {
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b9df7;
+}
+
+/* Highlights (==text==) */
+.post-content mark,
+.post-content ins {
+    background: #fef08a;
+    color: #1a1a2e;
+    padding: 0 4px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+/* Video wrapper */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Carousel */
+.carousel {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 0;
+    margin: 16px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+.carousel img {
+    flex: 0 0 auto;
+    width: 280px;
+    border-radius: 6px;
+    scroll-snap-align: start;
+    border: 1px solid var(--border, #e5e7eb);
+}
+
+/* Details/summary */
+details summary {
+    cursor: pointer;
+    color: var(--link-color, #2563eb);
+    font-weight: 600;
+    margin: 8px 0;
+}
+details summary:hover {
+    opacity: 0.8;
+}
+
+/* Product data block */
+.post-content blockquote + p + p br {
+    display: block;
+    content: "";
+    margin: 4px 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] .post-content blockquote {
+    background: #1e1e2e;
+}
+[data-theme="dark"] .post-content mark,
+[data-theme="dark"] .post-content ins {
+    background: #854d0e;
+    color: #fef9c3;
+}
+[data-theme="dark"] .carousel img {
+    border-color: #374151;
+}
