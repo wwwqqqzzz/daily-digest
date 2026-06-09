@@ -11,20 +11,35 @@ enableEmoji = true
   unsafe = true
 
 [params]
+  defaultTheme = "light"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = true
+  ShowWordCount = false
+  ShowRssButtonInSectionTermList = false
+  UseHugoToc = true
+  disableScrollToTop = false
+
   [params.homeInfoParams]
     Title = "信息差日报"
-    Content = "每天 8 点，一篇解决你的信息差。冷知识 · Product Hunt · Big Think · GitHub · Buzzing"
+    Content = "每天 8 点，一篇解决你的信息差。"
+
+  [params.profileMode]
+    enabled = false
 
   [[params.socialIcons]]
     name = "github"
     url = "https://github.com/wwwqqqzzz"
 
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
   [params.cover]
     linkFullImages = true
-
-  ShowReadingTime = true
-  ShowShareButtons = true
-  ShowPostNavLinks = true
 
 [menu]
   [[menu.main]]
@@ -32,3 +47,12 @@ enableEmoji = true
     name = "归档"
     url = "/archive/"
     weight = 10
+
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 20
+
+[taxonomies]
+  tag = "tags"
