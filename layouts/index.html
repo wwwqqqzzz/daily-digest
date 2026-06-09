@@ -18,7 +18,7 @@
     {{- $pages = $pages | default (where site.RegularPages "Section" "posts") }}
     {{- $latest := index $pages 0 }}
     {{- if $latest }}
-    <a class="home-btn-primary" href="{{ $latest.RelPermalink }}">阅读最新一期</a>
+    <a class="home-btn-primary" href="{{ $latest.RelPermalink }}">阅读最新一期 →</a>
     {{- end }}
     <a class="home-btn-secondary" href="/archive/">浏览全部</a>
   </div>
