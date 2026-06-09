@@ -497,21 +497,21 @@ code, pre {
   min-width: 0;
 }
 
-/* Left sidebar */
+/* Left sidebar — date navigation */
 .post-sidebar-left {
   position: sticky;
   top: 24px;
 }
 
-.post-sidenav {
+.date-nav {
   font-family: var(--font-sans);
   font-size: 13px;
 }
 
-.sidenav-title {
+.dn-title {
   font-weight: 600;
   color: var(--secondary);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
   font-size: 11px;
@@ -519,29 +519,98 @@ code, pre {
   letter-spacing: 0.05em;
 }
 
-#sidenav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.dn-year {
+  margin-bottom: 4px;
 }
 
-#sidenav-list li {
-  margin: 0;
+.dn-year-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  border-radius: 4px;
+  transition: background 0.15s;
 }
 
-.sidenav-link {
-  display: block;
-  padding: 4px 8px;
+.dn-year-btn:hover {
+  background: var(--code-bg);
+}
+
+.dn-chevron {
+  font-size: 10px;
+  transition: transform 0.2s;
+  color: var(--tertiary);
+}
+
+.dn-open .dn-chevron {
+  transform: rotate(90deg);
+}
+
+.dn-year-content {
+  padding-left: 8px;
+}
+
+.dn-month {
+  margin-bottom: 8px;
+}
+
+.dn-month-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--tertiary);
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dn-current-month {
+  color: var(--headline);
+}
+
+.dn-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px 0;
+}
+
+.dn-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   color: var(--tertiary);
   text-decoration: none;
   border-radius: 4px;
-  line-height: 1.5;
   transition: background 0.15s, color 0.15s;
+  line-height: 1;
 }
 
-.sidenav-link:hover {
+.dn-day:hover {
   background: var(--code-bg);
   color: var(--primary);
+}
+
+.dn-current {
+  background: var(--headline);
+  color: #fff;
+  font-weight: 600;
+}
+
+.dn-current:hover {
+  opacity: 0.85;
+  color: #fff;
 }
 
 /* Right sidebar (TOC) */
@@ -607,7 +676,33 @@ code, pre {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  .post-sidebar-left,
+  .post-sidebar-left {
+    position: static;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .date-nav {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .date-nav.dn-mobile-open {
+    max-height: 600px;
+  }
+  .dn-title {
+    cursor: pointer;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .dn-mobile-open .dn-title {
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dn-year-content {
+    padding-left: 0;
+  }
   .post-sidebar-right {
     display: none;
   }

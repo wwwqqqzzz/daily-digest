@@ -2,9 +2,33 @@
 
 <div class="post-layout">
   <aside class="post-sidebar-left">
-    <nav class="post-sidenav" id="post-sidenav">
-      <div class="sidenav-title">本页速览</div>
-      <ul id="sidenav-list"></ul>
+    <nav class="date-nav">
+      <div class="dn-title">日期导航</div>
+      {{- $current := . }}
+      {{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
+      {{- $posts = $posts | default (where site.RegularPages "Section" "posts") }}
+      {{- $currentYear := $current.Date.Format "2006" }}
+      {{- $currentMonth := $current.Date.Format "1" }}
+      {{- range $posts.GroupByDate "2006" }}
+      {{- $year := .Key }}
+      {{- $isCurrentYear := eq $year $currentYear }}
+      <div class="dn-year{{ if $isCurrentYear }} dn-open{{ end }}">
+        <button class="dn-year-btn" onclick="toggleDateYear(this)">{{ $year }}年<span class="dn-chevron">▸</span></button>
+        <div class="dn-year-content"{{ if not $isCurrentYear }} hidden{{ end }}>
+          {{- range .Pages.GroupByDate "January" }}
+          {{- $first := index .Pages 0 }}
+          {{- $monthNum := $first.Date.Format "1" }}
+          {{- $isCurrentMonth := and $isCurrentYear (eq $monthNum $currentMonth) }}
+          <div class="dn-month">
+            <div class="dn-month-label{{ if $isCurrentMonth }} dn-current-month{{ end }}">{{ $monthNum }}月</div>
+            <div class="dn-days">
+              {{- range sort .Pages ".Date" }}<a class="dn-day{{ if eq $current.RelPermalink .RelPermalink }} dn-current{{ end }}" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Date.Format "2" }}</a>{{- end }}
+            </div>
+          </div>
+          {{- end }}
+        </div>
+      </div>
+      {{- end }}
     </nav>
   </aside>
 
@@ -31,20 +55,21 @@
 </div>
 
 <script>
-(function() {
-  var h2s = document.querySelectorAll('.post-content h2');
-  var list = document.getElementById('sidenav-list');
-  if (!list || !h2s.length) return;
-  h2s.forEach(function(h) {
-    var li = document.createElement('li');
-    var a = document.createElement('a');
-    a.textContent = h.textContent.replace(/^[\d、\s🧊🔥🧠📦🌐]+/, '').trim();
-    a.href = '#' + h.id;
-    a.className = 'sidenav-link';
-    li.appendChild(a);
-    list.appendChild(li);
-  });
-})();
+function toggleDateYear(btn) {
+  var year = btn.closest('.dn-year');
+  var content = year.querySelector('.dn-year-content');
+  if (year.classList.contains('dn-open')) {
+    year.classList.remove('dn-open');
+    content.hidden = true;
+  } else {
+    year.classList.add('dn-open');
+    content.hidden = false;
+  }
+}
+function toggleMobileDateNav() {
+  var nav = document.querySelector('.date-nav');
+  if (nav) nav.classList.toggle('dn-mobile-open');
+}
+document.querySelector('.dn-title')?.addEventListener('click', toggleMobileDateNav);
 </script>
-
 {{- end }}
