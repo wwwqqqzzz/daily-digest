@@ -41,18 +41,14 @@ enableEmoji = true
   [params.cover]
     linkFullImages = true
 
+  mainSections = ["posts"]
+
 [menu]
   [[menu.main]]
     identifier = "archive"
     name = "归档"
     url = "/archive/"
     weight = 10
-
-  [[menu.main]]
-    identifier = "tags"
-    name = "标签"
-    url = "/tags/"
-    weight = 20
 
 [taxonomies]
   tag = "tags"
