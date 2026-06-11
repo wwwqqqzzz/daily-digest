@@ -1,0 +1,26 @@
+{{- define "main" }}
+
+<article class="home-intro">
+  <div class="home-intro-brand">
+    <h1>简讯</h1>
+    <p class="home-intro-tagline">每天一份信息差</p>
+  </div>
+
+  <div class="home-intro-desc">
+    <p>每日八点，一点恰如其分的讯息。</p>
+  </div>
+
+  <hr class="home-divider">
+
+  <div class="home-intro-actions">
+    {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+    {{- $pages = $pages | default (where site.RegularPages "Section" "posts") }}
+    {{- $latest := index $pages 0 }}
+    {{- if $latest }}
+    <a class="home-btn-primary" href="{{ $latest.RelPermalink }}">阅读最新一期 →</a>
+    {{- end }}
+    <a class="home-btn-secondary" href="/archive/">浏览全部</a>
+  </div>
+</article>
+
+{{- end }}
